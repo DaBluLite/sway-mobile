@@ -1,97 +1,89 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Sway Music
 
-# Getting Started
+Sway is an ecosystem of apps that help you discover, organise, and enjoy your music. This repository hosts the **mobile** app, a React Native music and internet radio player, which allows you to listen to radio stations, connect your own Subsonic/OpenSubsonic music server, and keep your favourite stations and music together in one app.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+You can use Sway for radio without configuring a music server, or enable Subsonic during setup to browse and stream your personal collection.
 
-## Step 1: Start Metro
+## What the app does
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+- **Internet radio:** Discover and search stations through [Radio Browser](https://www.radio-browser.info/), save favourites, revisit listening history, and organise stations into curated collections.
+- **Your music library:** Connect to a Subsonic/OpenSubsonic-compatible server to browse albums, artists, genres, and songs, search your collection, and manage playlists and starred music.
+- **Playback controls:** Manage the queue, play next, shuffle, repeat, and set a sleep timer. Autoplay can extend the queue with similar songs.
+- **Spotify library transfer:** Authorise Spotify to read playlists, liked songs, saved albums, and followed artists, then review matches against music on your Subsonic server. This matches existing music—it does not download audio from Spotify or provide Spotify playback.
+- **Car view:** A simplified interface with larger playback controls and configurable shortcuts to music and stations. This is an in-app view, not an Android Auto or CarPlay integration.
+- **Appearance and storage:** Customise the app's appearance, inspect local storage usage, and clear cached files.
+- **Android audio options:** Request exclusive access to a USB DAC and enable best-effort sample-rate and bit-depth matching. Availability depends on the device, DAC, and playback path; bit-perfect output is not guaranteed.
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+## Getting started in the app
+
+1. Complete the welcome flow and choose your country for radio discovery.
+2. Either skip music-server setup to use radio, or enable Subsonic and enter your server URL and credentials.
+3. Use **Home** to discover content, **Library** to find saved stations and music, and **Search** to look for something specific.
+4. Open **Now Playing** for playback controls, or use **Settings** to adjust the experience and start a Spotify library transfer.
+
+Radio and music streaming require a network connection. The current music playback path streams directly from the server; offline playback is not currently wired into that path.
+
+## Development
+
+The app uses TypeScript, React 19, and React Native 0.87, with React Navigation, MMKV-backed local storage, and native audio playback integrations. The repository contains Android and iOS projects; Android-specific audio features are not available on iOS.
+
+### Prerequisites
+
+- Node.js **22.11.0 or newer**.
+- pnpm. The repository's pnpm configuration applies a patch to `react-native-track-player`.
+- A working [React Native development environment](https://reactnative.dev/docs/set-up-your-environment).
+- Android Studio and the Android SDK for Android development.
+- macOS, Xcode, Ruby/Bundler, and CocoaPods for iOS development.
+
+### Install dependencies
+
+From the repository root:
 
 ```sh
-# Using npm
-npm start
-
-# OR using Yarn
-yarn start
+pnpm install
 ```
 
-## Step 2: Build and run your app
+Installation also needs access to the Git-hosted `@dablulite/rn-audio-stream` dependency at `git.dablulite.dev`.
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
-
-### Android
-
-```sh
-# Using npm
-npm run android
-
-# OR using Yarn
-yarn android
-```
-
-### iOS
-
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+For iOS, install the Ruby dependencies from the repository root, then install pods from `ios/`:
 
 ```sh
 bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
+cd ios
 bundle exec pod install
+cd ..
 ```
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+### Run the app
+
+Start Metro:
 
 ```sh
-# Using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
+pnpm start
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+In a separate terminal, build and launch the app:
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+```sh
+# Android emulator or connected device
+pnpm android
 
-## Step 3: Modify your app
+# iOS simulator or connected device (macOS only)
+pnpm ios
+```
 
-Now that you have successfully run the app, let's make changes!
+### Checks
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+```sh
+pnpm lint
+pnpm test
+```
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+### Project layout
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+- `src/screens/` — browsing, playback, onboarding, car view, and settings screens.
+- `src/components/` — shared UI and navigation components.
+- `src/contexts/` — playback, library, playlists, favourites, history, theme, and other shared state.
+- `src/services/` — Subsonic access, Spotify authorisation and transfer matching, and storage/cache services.
+- `src/utils/` — shared helpers and native audio bridges.
+- `android/` and `ios/` — native platform projects.

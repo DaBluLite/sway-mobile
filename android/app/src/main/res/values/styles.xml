@@ -4,6 +4,60 @@
     <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="android:editTextBackground">@drawable/rn_edit_text_material</item>
+        <item name="android:enforceNavigationBarContrast">true</item>
+        <item name="android:windowBackground">@color/bootsplash_background</item>
+        <item name="colorPrimary">@color/cast_primary</item>
+        <item name="colorPrimaryDark">@color/cast_primary_dark</item>
+        <item name="colorAccent">@color/cast_accent</item>
+        <item name="castIntroOverlayStyle">@style/CustomCastIntroOverlay</item>
+        <item name="castMiniControllerStyle">@style/CustomCastMiniController</item>
+        <item name="castExpandedControllerStyle">@style/CustomCastExpandedController</item>
+        <item name="castExpandedControllerToolbarStyle">@style/CustomCastExpandedControllerToolbar</item>
+        <item name="mediaRouteTheme">@style/CustomMediaRouterTheme</item>
+    </style>
+
+    <style name="BootTheme" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/bootsplash_logo</item>
+        <item name="windowSplashScreenBackground">@color/bootsplash_background</item>
+        <item name="postSplashScreenTheme">@style/AppTheme</item>
+        <item name="windowSplashScreenIconBackgroundColor">@color/bootsplash_background</item>
+    </style>
+
+    <!-- Cast: Introductory overlay -->
+    <style name="CustomCastIntroOverlay" parent="CastIntroOverlay">
+        <item name="castButtonTextAppearance">@style/TextAppearance.CustomCastIntroOverlay.Button</item>
+        <item name="castTitleTextAppearance">@style/TextAppearance.CustomCastIntroOverlay.Title</item>
+    </style>
+    <style name="TextAppearance.CustomCastIntroOverlay.Button" parent="android:style/TextAppearance">
+        <item name="android:textColor">@color/cast_primary</item>
+    </style>
+    <style name="TextAppearance.CustomCastIntroOverlay.Title" parent="android:style/TextAppearance.Large">
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+    <!-- Cast: Mini controller -->
+    <style name="CustomCastMiniController" parent="CastMiniController">
+        <item name="castShowImageThumbnail">true</item>
+        <item name="castTitleTextAppearance">@style/TextAppearance.AppCompat.Subhead</item>
+        <item name="castSubtitleTextAppearance">@style/TextAppearance.AppCompat.Caption</item>
+        <item name="castBackground">@color/cast_background_dark</item>
+        <item name="castProgressBarColor">@color/cast_primary</item>
+    </style>
+
+    <!-- Cast: Expanded controller -->
+    <style name="CustomCastExpandedController" parent="CastExpandedController">
+        <item name="castButtonColor">@color/cast_primary</item>
+        <item name="castProgressBarColor">@color/cast_primary</item>
+    </style>
+    <style name="CustomCastExpandedControllerToolbar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+    </style>
+
+    <!-- Cast button -->
+    <style name="CustomMediaRouterTheme" parent="Theme.MediaRouter">
+        <item name="mediaRouteButtonStyle">@style/CustomMediaRouteButtonStyle</item>
+    </style>
+    <style name="CustomMediaRouteButtonStyle" parent="Widget.MediaRouter.Light.MediaRouteButton">
+        <item name="mediaRouteButtonTint">@color/cast_primary</item>
     </style>
 
 </resources>

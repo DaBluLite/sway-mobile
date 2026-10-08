@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Catch-all for USB audio class -->
+    <usb-device class="1" subclass="0" protocol="0" />
+    <usb-device class="1" subclass="1" protocol="0" />
+    <usb-device class="1" subclass="2" protocol="0" />
+</resources>

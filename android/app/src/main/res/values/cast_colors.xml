@@ -1,0 +1,11 @@
+<resources>
+    <color name="cast_primary">#16a34a</color>
+    <color name="cast_primary_dark">#15803d</color>
+    <color name="cast_accent">#16a34a</color>
+    <color name="cast_background_light">#FFFFFF</color>
+    <color name="cast_background_dark">#000000</color>
+    <color name="cast_text_primary_light">#0f172a</color>
+    <color name="cast_text_secondary_light">#64748b</color>
+    <color name="cast_text_primary_dark">#f8fafc</color>
+    <color name="cast_text_secondary_dark">#94a3b8</color>
+</resources>
