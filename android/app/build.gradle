@@ -98,6 +98,14 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
+        release {
+            if (project.hasProperty('SWAY_MOBILE_UPLOAD_STORE_FILE')) {
+                storeFile file(SWAY_MOBILE_UPLOAD_STORE_FILE)
+                storePassword SWAY_MOBILE_UPLOAD_STORE_PASSWORD
+                keyAlias SWAY_MOBILE_UPLOAD_KEY_ALIAS
+                keyPassword SWAY_MOBILE_UPLOAD_KEY_PASSWORD
+            }
+        }
     }
     buildTypes {
         debug {
@@ -106,7 +114,7 @@ android {
         release {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
         }

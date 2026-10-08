@@ -1,0 +1,56 @@
+name: Android release
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Decode keystore
+        run: echo "${{ secrets.UPLOAD_KEYSTORE_B64 }}" | base64 -d > android/app/upload.keystore
+
+      - name: Build APK and AAB
+        working-directory: android
+        env:
+          ORG_GRADLE_PROJECT_SWAY_MOBILE_UPLOAD_STORE_FILE: upload.keystore
+          ORG_GRADLE_PROJECT_SWAY_MOBILE_UPLOAD_KEY_ALIAS: ${{ secrets.UPLOAD_KEY_ALIAS }}
+          ORG_GRADLE_PROJECT_SWAY_MOBILE_UPLOAD_STORE_PASSWORD: ${{ secrets.UPLOAD_STORE_PASSWORD }}
+          ORG_GRADLE_PROJECT_SWAY_MOBILE_UPLOAD_KEY_PASSWORD: ${{ secrets.UPLOAD_STORE_PASSWORD }}
+        run: ./gradlew assembleRelease bundleRelease
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: android-release
+          path: |
+            android/app/build/outputs/apk/release/*.apk
+            android/app/build/outputs/bundle/release/*.aab
+
+      - name: Publish GitHub Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: android/app/build/outputs/apk/release/*.apk
