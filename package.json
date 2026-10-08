@@ -1,6 +1,6 @@
 {
   "name": "sway-mobile",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "Listen to your music with purpose.",
   "private": true,
   "scripts": {
